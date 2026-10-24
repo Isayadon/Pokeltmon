@@ -18,9 +18,9 @@ int main()
     while (window.isOpen()) //é um loop que continua enquanto a janela estiver aberta. Ele verifica se a janela ainda está aberta e, se estiver, executa o código dentro do Loop. Se a janela for fechada, o Loop termina e o programa continua a execução após o Loop. //
     //Se fica true, O loop continua, se fica false, o Loop termina. //
     {
-        while (const optional event = window.pollEvent()) 
+        while (const optional event = window.pollEvent()) //é um loop que verifica se há eventos na fila de eventos da janela. Ele usa a função pollEvent() para obter o próximo evento da fila, se houver algum. Se houver um evento, ele é armazenado na variável event e o código dentro do Loop é executado. Se não houver eventos, o Loop termina e o programa continua a execução após o Loop. //
         {
-            if (event->is<Event::Closed>()) 
+            if (event->is<Event::Closed>()) //verificar se o evento é do tipo Event::Closed, que indica que o usuário clicou no botão de fechar da janela. Se for esse o caso, o código dentro do if é executado. //
             {
                 window.close(); //fecha a janela quando o evento de fechamento é detectado. //
             }
@@ -29,6 +29,6 @@ int main()
         window.clear(Color::Black); //limpa a janela com a cor preta antes de desenhar qualquer coisa. //
         window.display(); //atualiza a janela pra exibir o conteúdo desenhado. //
     }
-    
+
     return 0;
 }
