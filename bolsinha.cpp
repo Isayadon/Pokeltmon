@@ -1,0 +1,2 @@
+// on this pice of the project we will create a function where we will do all functions to the bag like a prostitute and pokemon bag 
+// in this bag they will can use itens trade a pokemon place and reroll a pokemons in they team
