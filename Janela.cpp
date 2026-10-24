@@ -29,6 +29,6 @@ int main()
         window.clear(Color::Black); //limpa a janela com a cor preta antes de desenhar qualquer coisa. //
         window.display(); //atualiza a janela pra exibir o conteúdo desenhado. //
     }
-
+  //aiaiaiaiai//
     return 0;
 }
