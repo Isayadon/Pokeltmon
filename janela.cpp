@@ -8,7 +8,7 @@ using namespace sf;
 void desenha_elementos(RenderWindow& janela, Sprite& personagem);
 void desenha_fundo(RenderWindow& janela, Sprite& fundo);
 
-int main()
+int porenquantonao()
 {
     bool personagem_na_tela = 1; // Variável para controlar a exibição do personagem.
     bool gen_mc=1;// se mc==1 é mulher e 0 homen

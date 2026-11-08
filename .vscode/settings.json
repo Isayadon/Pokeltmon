@@ -1,0 +1,8 @@
+
+{
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ -std=c++17 -Wall -Wextra -g3 *.cpp -o /tmp/programa -I/home/paulo3108/opt/SFML-3.1.0/include -L/home/paulo3108/opt/SFML-3.1.0/lib -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lGL -lX11 -lXrandr -lXcursor -lXi -ludev -lfreetype -lharfbuzz -pthread && /tmp/programa"
+    }
+}

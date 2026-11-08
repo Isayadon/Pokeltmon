@@ -1,0 +1,50 @@
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar SFML 3",
+            "type": "process",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "${workspaceFolder}/janela.cpp",
+                "-o",
+                "${workspaceFolder}/janela",
+                "-I${env:HOME}/opt/SFML-3.1.0/include",
+                "-L${env:HOME}/opt/SFML-3.1.0/lib",
+                "-lsfml-graphics-s",
+                "-lsfml-window-s",
+                "-lsfml-system-s",
+                "-lGL",
+                "-lX11",
+                "-lXrandr",
+                "-lXcursor",
+                "-lXi",
+                "-ludev",
+                "-lfreetype",
+                "-lharfbuzz",
+                "-pthread"
+            ],
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "Executar programa",
+            "type": "process",
+            "command": "${workspaceFolder}/janela",
+            "dependsOn": "Compilar SFML 3"
+        },
+        {
+            "label": "Compilar e executar",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Compilar SFML 3",
+                "Executar programa"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
