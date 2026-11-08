@@ -1,34 +1,75 @@
-#include <SFML/Graphics.hpp> //É a biblioteca que permite criar janelas, desenhar formas, imagens e textos, além de lidar com eventos de entrada do usuário. Exemplo: RenderWindow, Videomode, Color, Event, etc. //
 
-#include <optional> //ele permite representar valores que podem ou não estar presentes e fornece segurança para o código, evita bugs e posso usar valores nulos. Exemplo: optional, nullopt, has_value(), value() //
+#include <SFML/Graphics.hpp> // Biblioteca gráfica da SFML.
+#include <optional>         // Permite representar valores que podem estar ausentes.
 
-using namespace std; //evita repetir std:: no código. //
+using namespace std;
+using namespace sf;
 
-using namespace sf; //evita repetir sf:: no código. //
+void desenha_elementos(RenderWindow& janela, Sprite& personagem);
+void desenha_fundo(RenderWindow& janela, Sprite& fundo);
 
 int main()
 {
-    RenderWindow window(  //é o tipo do objeto que representa uma janela na qual você pode desenhar e window é o nome do objeto que representa a janella //
-
-        VideoMode({800, 600}), //define as dimensões desejadas para a janela e o VideoMode é uma classe que representa a resolução da janela. 800 é a largura e 600 é a altura da janela. //
-
-        "Pokeltmon" //o texto que será exibido na barra de título da janela. //
+    bool personagem_na_tela = 1; // Variável para controlar a exibição do personagem.
+    bool gen_mc=1;// se mc==1 é mulher e 0 homen
+    unsigned int tam_janeala_x = 800; // Largura da janela.
+    unsigned int tam_janeala_y = 600; // Altura da janela.
+    // Cria uma janela de 800x600 pixels.
+    RenderWindow window(
+        VideoMode({tam_janeala_x, tam_janeala_y}),
+        "Pokeltmon"
     );
 
-    while (window.isOpen()) //é um loop que continua enquanto a janela estiver aberta. Ele verifica se a janela ainda está aberta e, se estiver, executa o código dentro do Loop. Se a janela for fechada, o Loop termina e o programa continua a execução após o Loop. //
-    //Se fica true, O loop continua, se fica false, o Loop termina. //
+    Texture mc;
+    if (!mc.loadFromFile("personagens/mc_feminino.png")) // Carrega a textura do personagem feminino.
+        return -1;
+    Sprite personagem(mc); // Cria um sprite para o personagem.
+    personagem.setScale({3.f,3.f}); // Ajusta a escala do personagem para 2x2. pq a imagem é pequena
+    personagem.setPosition({80.f, 380.f}); // Posiciona o personagem no centro da janela.
+
+    Texture fundo1;
+    if (!fundo1.loadFromFile("fundos/fundo_batalha.png")) // Carrega a textura do fundo.
+        return -1;
+    Sprite fundo(fundo1); // Cria um sprite para o fundo.
+    fundo.setScale({
+    static_cast<float>(tam_janeala_x) / fundo1.getSize().x,
+    static_cast<float>(tam_janeala_y) / fundo1.getSize().y
+    }); // Ajusta a escala do fundo para preencher a janela.
+
+
+    // Loop principal: continua enquanto a janela estiver aberta.
+    while (window.isOpen())
     {
-        while (const optional event = window.pollEvent()) //é um loop que verifica se há eventos na fila de eventos da janela. Ele usa a função pollEvent() para obter o próximo evento da fila, se houver algum. Se houver um evento, ele é armazenado na variável event e o código dentro do Loop é executado. Se não houver eventos, o Loop termina e o programa continua a execução após o Loop. //
+        // Verifica os eventos recebidos pela janela.
+        while (const optional event = window.pollEvent())
         {
-            if (event->is<Event::Closed>()) //verificar se o evento é do tipo Event::Closed, que indica que o usuário clicou no botão de fechar da janela. Se for esse o caso, o código dentro do if é executado. //
+            // Fecha a janela quando o usuário solicita seu fechamento.
+            if (event->is<Event::Closed>())
             {
-                window.close(); //fecha a janela quando o evento de fechamento é detectado. //
+                window.close();
             }
         }
 
-        window.clear(Color::Black); //limpa a janela com a cor preta antes de desenhar qualquer coisa. //
-        window.display(); //atualiza a janela pra exibir o conteúdo desenhado. //
+        window.clear(Color::Black); // Limpa a tela antes de desenhar.
+        desenha_fundo(window, fundo); 
+        if (personagem_na_tela==1)
+            desenha_elementos(window, personagem); // Desenha o personagem e os pokemons na janela.
+
+        window.display(); // Atualiza o conteúdo exibido na janela.
     }
 
     return 0;
+}
+
+// Desenha o personagem na janela.
+void desenha_elementos(RenderWindow& janela, Sprite& personagem)
+{
+    janela.draw(personagem);    // Desenha o personagem.
+    //janela.draw(pokemons);      // vai desenhar os pokemons
+}
+
+// Desenha o plano defundo da janela.
+void desenha_fundo(RenderWindow& janela, Sprite& fundo)
+{
+    janela.draw(fundo); 
 }
