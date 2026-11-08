@@ -7,9 +7,9 @@
 
 using namespace std;
 
+
 bool importa_do_arquivo(string id, string pokemon[8])
 {
-    int coluna = 0;
     ifstream file("Pokemons.txt");
 
     if (!file.is_open())
@@ -22,14 +22,16 @@ bool importa_do_arquivo(string id, string pokemon[8])
 
     while (getline(file, linha))
     {
-    if (!linha.empty() && static_cast<unsigned char>(linha[0]) == 0xEF)
-    {   
-        linha.erase(0, 3); // os 3primeiros caracteres do arquvivo é invisivel para identificar que iniciou e eles atrapalham logo aqui eu apago eles 
-    }
+        int coluna = 0; // Reinicia para cada linha
+
+        if (!linha.empty() && static_cast<unsigned char>(linha[0]) == 0xEF)
+        {
+            linha.erase(0, 3);
+        }
+
         stringstream ss(linha);
         string campo;
         string ivs[8];
-
 
         while (getline(ss, campo, ';') && coluna < 8)
         {
