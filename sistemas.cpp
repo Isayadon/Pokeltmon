@@ -9,7 +9,7 @@
 using namespace std;
 
 void aleatoriza_time(Pokeltidex &dex, Time &mc);
-
+void mochila (Time &mc);
 
 // entao eu nao sei oq fazer entao vou ficar brincando com o codigo ate eu descobrir oq fazer
 int main()
@@ -36,7 +36,6 @@ int main()
     cout << "Digite o gênero do personagem (1 para feminino, 0 para masculino): ";
     cin >> gender; // Lê o gênero do personagem. aqui nao vai mudar nada no codigo
     while (continua) // Loop infinito para manter o programa em execução.
-
     {
         cout << "oq vc quer fazer?" << endl;
         cout << "1 - Aleatorizar o time 2- centro pokemon 3- ver mochila 4- batalha" << endl;
@@ -57,15 +56,7 @@ int main()
         {
             for (int i = 0; i < 6; i++)
             {
-                cout << "Pokemon " << i + 1 << ": " << mc.time[i].nome << endl;
-                cout << "Tipo: " << mc.time[i].tipo << endl;
-                cout << "HP Atual: " << mc.time[i].hp_atual << endl;
-                cout << "HP: " << mc.time[i].hp_maximo << endl;
-                cout << "Ataque: " << mc.time[i].ataque << endl;
-                cout << "Defesa: " << mc.time[i].defesa << endl;
-                cout << "Speed: " << mc.time[i].speed << endl;
-                cout << "Special: " << mc.time[i].special << endl;
-                cout << endl;
+                mochila(mc); // Chama a função para exibir a mochila e permitir interações com os Pokémons.
             }
         }
         else if (escolha == 5)//fecha o jogo
@@ -122,5 +113,62 @@ void aleatoriza_time(Pokeltidex &dex, Time &mc)
         mc.time[i].defesa = time[i].defesa;
         mc.time[i].speed = time[i].speed;
         mc.time[i].special = time[i].special;
+    }
+}
+
+void mochila (Time &mc)
+{
+    bool mochila_aberta = true;
+    int escolha;
+    while(mochila_aberta)
+    {
+        cout << "oq vc quer fazer?" << endl;
+        cout << "1 - ver pokemons 2- usar item 3- sair" << endl;
+        cin >> escolha;
+        if (escolha ==1)
+        {
+            for(int i=0;i<6;i++)
+            {
+                cout << "Pokemon " << i + 1 << ": " << mc.time[i].nome << endl;
+                cout << "Tipo: " << mc.time[i].tipo << endl;
+                cout << "HP Atual: " << mc.time[i].hp_atual << endl;
+                cout << "HP: " << mc.time[i].hp_maximo << endl;
+                cout << "Ataque: " << mc.time[i].ataque << endl;
+                cout << "Defesa: " << mc.time[i].defesa << endl;
+                cout << "Speed: " << mc.time[i].speed << endl;
+                cout << "Special: " << mc.time[i].special << endl;
+                cout << endl;
+            }
+            cout << "deseja trocar algum de lugar(1 sim 0 nao)" << endl;
+            cin >> escolha;
+            if (escolha == 1)
+            {
+                pokemon_time ajuda;
+                int escolha2 =0;
+                cout << "qual pokemon deseja trocar de lugar(0-5)" << endl;
+                cin >> escolha;
+                while (escolha < 0 || escolha > 5)
+                {
+                    cout << "Escolha inválida. Por favor, selecione um número entre 0 e 5." << endl;
+                    cin >> escolha;
+                }
+                ajuda = mc.time[escolha];
+                cout << "qual pokemon deseja colocar no lugar do escolhido(0-5)" << endl;
+                cin >> escolha2;
+                while (escolha2 < 0 || escolha2 > 5)
+                {
+                    cout << "Escolha inválida. Por favor, selecione um número entre 0 e 5." << endl;
+                    cin >> escolha2;
+                }
+                mc.time[escolha] = mc.time[escolha2];
+                mc.time[escolha2] = ajuda;
+            }
+        }
+        else if (escolha ==2)
+        {
+            cout << "WIP";// caso nos fizermos itens aqui que vamos mecher;
+        }
+        else 
+            mochila_aberta= false;
     }
 }
