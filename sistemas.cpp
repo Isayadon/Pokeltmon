@@ -3,24 +3,24 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <string>
-
+#include <time.h>
 
 using namespace std;
 
-void aleatoriza_time(Pokeltidex &dex, Pokemon time[6]);
+void aleatoriza_time(Pokeltidex &dex, Time &mc);
 
 
 // entao eu nao sei oq fazer entao vou ficar brincando com o codigo ate eu descobrir oq fazer
 int main()
 {
+    srand(time(NULL)); 
     bool gender; // Variável para armazenar o gênero do personagem.
     bool continua = true; // Variável para controlar o loop principal.
     int escolha;
-
+    Time mc;
     Pokeltidex dex;
-    Pokemon time[6]; // Array para armazenar o time de 6 Pokémons do jogador.
+    
     // so tem o problema da vida atual  mas isso ve depois 
 
     if (!carrega_tudo(dex))
@@ -30,7 +30,7 @@ int main()
     }
 
     cout << "Pokedex carregada!" << endl;
-    aleatoriza_time(dex, time);// tem que ter no inicio por preucaução
+    aleatoriza_time(dex, mc);// tem que ter no inicio por preucaução
     cout << "time inicial carregado!" << endl;
 
     cout << "Digite o gênero do personagem (1 para feminino, 0 para masculino): ";
@@ -39,34 +39,41 @@ int main()
 
     {
         cout << "oq vc quer fazer?" << endl;
-        cout << "1 - Aleatorizar o time 2- centro pokemon 3- ver mochila 4- sair do jogo" << endl;
+        cout << "1 - Aleatorizar o time 2- centro pokemon 3- ver mochila 4- batalha" << endl;
         cin >> escolha; 
         if (escolha == 1)
         {
-            aleatoriza_time(dex, time); // Chama a função para aleatorizar o time de Pokémons
+            aleatoriza_time(dex, mc); // Chama a função para aleatorizar o time de Pokémons
         }
         else if (escolha == 2)//centro pokemon
         {
-
+            for (int i = 0; i < 6; i++)
+            {
+                mc.time[i].hp_atual = mc.time[i].hp_maximo; // Restaura o HP atual para o HP máximo.
+            }
+            cout << "Todos os Pokémons foram curados!" << endl;
         }
         else if (escolha == 3)//ver mochila
         {
             for (int i = 0; i < 6; i++)
             {
-                cout << "Pokemon " << i + 1 << ": " << time[i].nome << endl;
-                cout << "Tipo: " << time[i].tipo << endl;
-                cout << "HP: " << time[i].hp << endl;
-                cout << "Ataque: " << time[i].ataque << endl;
-                cout << "Defesa: " << time[i].defesa << endl;
-                cout << "Speed: " << time[i].speed << endl;
-                cout << "Special: " << time[i].special << endl;
+                cout << "Pokemon " << i + 1 << ": " << mc.time[i].nome << endl;
+                cout << "Tipo: " << mc.time[i].tipo << endl;
+                cout << "HP Atual: " << mc.time[i].hp_atual << endl;
+                cout << "HP: " << mc.time[i].hp_maximo << endl;
+                cout << "Ataque: " << mc.time[i].ataque << endl;
+                cout << "Defesa: " << mc.time[i].defesa << endl;
+                cout << "Speed: " << mc.time[i].speed << endl;
+                cout << "Special: " << mc.time[i].special << endl;
                 cout << endl;
             }
         }
-        else if (escolha == 4)//fecha o jogo
-            continua = false; // Sai do loop principal e encerra o programa.
+        else if (escolha == 5)//fecha o jogo
+        {
+
+        }
         else
-            cout << "Escolha inválida. Tente novamente." << endl;
+            continua = false; // Sai do loop principal e encerra o programa.
     }
     return 0;
 }
@@ -98,11 +105,22 @@ bool carrega_tudo(Pokeltidex &dex)
 
     return true;
 }
-void aleatoriza_time(Pokeltidex &dex, Pokemon time[6])
+void aleatoriza_time(Pokeltidex &dex, Time &mc)
 {
+    Pokemon time[6]; // Array para armazenar o time de 6 Pokémons do jogador. temporaria mente 
     for (int i = 0; i < 6; i++)
     {
         int indice = rand() % 100; // Gera um índice aleatório entre 0 e 99.
         time[i] = dex.pokemon[indice]; // Adiciona o Pokémon aleatório ao time.
+        // aqui vai fazer o pokemon do time do slot correspondente receba os dados do pokemon aleatorio que foi escolhido
+        mc.time[i].id = time[i].id;
+        mc.time[i].nome = time[i].nome;
+        mc.time[i].tipo = time[i].tipo;
+        mc.time[i].hp_atual = time[i].hp; // Define o HP atual como o HP máximo do Pokémon.
+        mc.time[i].hp_maximo = time[i].hp;
+        mc.time[i].ataque = time[i].ataque;
+        mc.time[i].defesa = time[i].defesa;
+        mc.time[i].speed = time[i].speed;
+        mc.time[i].special = time[i].special;
     }
 }
