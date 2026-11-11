@@ -5,12 +5,25 @@
 #include <fstream>
 #include <string>
 #include <time.h>
+#include <cstdlib>
+
+Time gym1;
+Time gym2;
+Time gym3;
+Time gym4;
+Time gym5;
+Time gym6;
+Time gym7;
+Time gym8;
 
 using namespace std;
 
 void aleatoriza_time(Pokeltidex &dex, Time &mc, bool npc_ou_mc,Time &npc);
 void mochila (Time &mc, bool insignia[8]);
 void batalha(Time &mc, bool insignia[8], Pokeltidex &dex,Time npc);
+void time_gym(Pokeltidex &dex);
+int luta(Time &mc, Time &npc);
+
 
 // entao eu nao sei oq fazer entao vou ficar brincando com o codigo ate eu descobrir oq fazer
 int main()
@@ -76,7 +89,7 @@ int main()
         }
         else
             continua = false; // Sai do loop principal e encerra o programa.
-        system("clear");
+        system("cls||clear");
     }
     return 0;
 }
@@ -151,18 +164,18 @@ void aleatoriza_time(Pokeltidex &dex, Time &mc,bool npc_ou_mc, Time &npc)
 
 void mochila (Time &mc , bool insignia[8])
 {
-    system("clear");
+    system("cls||clear");
     bool mochila_aberta = true;
     int escolha;
     while(mochila_aberta)
     {
 
         cout << "oq vc quer fazer?" << endl;
-        cout << "1 - ver pokemons 2- ver itens 3- sair" << endl;
+        cout << "1 - ver pokemons 2- ver itens 3- ver insignias 4- sair" << endl;
         cin >> escolha;
         if (escolha ==1)
         {
-            system("clear"); 
+            system("cls||clear"); 
             for(int i=0;i<6;i++)
             {
                 cout << "Pokemon " << i + 1 << ": " << mc.time[i].nome << endl;
@@ -181,16 +194,18 @@ void mochila (Time &mc , bool insignia[8])
             {
                 pokemon_time ajuda;
                 int escolha2 =0;
-                cout << "qual pokemon deseja trocar de lugar(0-5)" << endl;
+                cout << "qual pokemon deseja trocar de lugar(1-6)" << endl;
                 cin >> escolha;
-                while (escolha < 0 || escolha > 5)
+                escolha--;
+                while (escolha < 1 || escolha > 6)
                 {
                     cout << "Escolha inválida. Por favor, selecione um número entre 0 e 5." << endl;
                     cin >> escolha;
                 }
                 ajuda = mc.time[escolha];
-                cout << "qual pokemon deseja colocar no lugar do escolhido(0-5)" << endl;
+                cout << "qual pokemon deseja colocar no lugar do escolhido(1-6)" << endl;
                 cin >> escolha2;
+                escolha2--;
                 while (escolha2 < 0 || escolha2 > 5)
                 {
                     cout << "Escolha inválida. Por favor, selecione um número entre 0 e 5." << endl;
@@ -202,7 +217,13 @@ void mochila (Time &mc , bool insignia[8])
         }
         else if (escolha ==2)
         {
-            system("clear"); 
+            system("cls||clear");
+            
+            
+            
+        }
+        else if (escolha == 3 )
+        {
             for (int i = 0; i < 8; i++)
             {
                 if (insignia[i]) 
@@ -210,10 +231,15 @@ void mochila (Time &mc , bool insignia[8])
                 else 
                     cout << "Insignia " << i + 1 << ": Não conquistada" << endl;
             }
-            
+        }
+        else if (escolha == 4)
+        {
+            mochila_aberta= false;
         }
         else 
-            mochila_aberta= false;
+        {
+            cout << "escolha invalida";
+        }
     }
 }
 
@@ -284,12 +310,12 @@ void batalha (Time &mc, bool insignia[8], Pokeltidex &dex, Time npc)
         {
             vitoria=luta(mc,gym1);
             if (vitoria == 1)
-                insignia[6] =1;
+                insignia[0]=1;
         }
     }
 }
 
-bool luta(Time &mc, Time &npc)
+int luta(Time &mc, Time &npc)
 {
     int round =1;
     int vitoria = 0;
@@ -347,7 +373,7 @@ bool luta(Time &mc, Time &npc)
         cout << "o que você irá fazer?" << endl;
         cout << "1- atacar 2- trocar de pokemon 3- fugir" << endl;
         cin >> escolha_batalha;
-
+        system("cls||clear");
 
         if (escolha_batalha == 1)
         {
@@ -402,20 +428,23 @@ bool luta(Time &mc, Time &npc)
                 vitoria = 2;
             }
             else 
-                cout << "você falhou em fugir";
+                cout << "você falhou em fugir" << endl;
             
         }
         else 
         {
             while (escolha_batalha<1||escolha_batalha>3)
             {
-            cout << "escolha invalida";   
+            cout << "escolha invalida" << endl;
             cin >> escolha_batalha;
             }
         }
         
-        // falta aqui o ataque do inimigo 
-        if (npc_campo.hp_atual<=0 && poke_campo_slot_npc>=5)
+        mc_campo.hp_atual -= ((npc_campo.poder_ataque*npc_campo.ataque/mc_campo.defesa)*afinidade(mc_campo.tipo,npc_campo.tipo));
+
+        
+
+        if (npc_campo.hp_atual<=0 && poke_campo_slot_npc<=5)
         {
             poke_campo_slot_npc++;
             npc_campo.nome=npc.time[poke_campo_slot_npc].nome;
@@ -433,7 +462,7 @@ bool luta(Time &mc, Time &npc)
             cout << "Você ganhou";
             vitoria = 1;
         }
-        else if (mc_campo.hp_atual <= 0 && mc_desmaiados<=5)
+        if (mc_campo.hp_atual <= 0 && mc_desmaiados<=5)
         {
             mc_campo.hp_atual=0; // para nao ter vida negativa
             cout << "Seu pokeltimon desmaiou";
@@ -470,13 +499,13 @@ bool luta(Time &mc, Time &npc)
     return vitoria;
 }
 
-bool time_gym(Pokeltidex &dex)
+void time_gym(Pokeltidex &dex)
 {
     int equipe_gym1[6] = {74, 75, 76, 95, 28, 50};
 
     for (int i = 0; i < 6; i++)
     {
-        Pokemon &p = dex.pokemon[equipe_gym1[i]];
+        Pokemon &p = dex.pokemon[equipe_gym1[i] - 1];
 
         gym1.time[i].id = p.id;
         gym1.time[i].nome = p.nome;
@@ -492,8 +521,7 @@ bool time_gym(Pokeltidex &dex)
 
     for (int i = 0; i < 6; i++)
     {
-        Pokemon &p = dex.pokemon[equipe_gym2[i]];
-
+        Pokemon &p = dex.pokemon[equipe_gym2[i] - 1];
         gym2.time[i].id = p.id;
         gym2.time[i].nome = p.nome;
         gym2.time[i].tipo = p.tipo;
@@ -508,7 +536,7 @@ bool time_gym(Pokeltidex &dex)
 
     for (int i = 0; i < 6; i++)
     {
-        Pokemon &p = dex.pokemon[equipe_gym3[i]];
+        Pokemon &p = dex.pokemon[equipe_gym3[i] - 1];
 
         gym3.time[i].id = p.id;
         gym3.time[i].nome = p.nome;
@@ -524,7 +552,7 @@ bool time_gym(Pokeltidex &dex)
 
     for (int i = 0; i < 6; i++)
     {
-        Pokemon &p = dex.pokemon[equipe_gym4[i]];
+        Pokemon &p = dex.pokemon[equipe_gym4[i] - 1];
 
         gym4.time[i].id = p.id;
         gym4.time[i].nome = p.nome;
@@ -540,7 +568,7 @@ bool time_gym(Pokeltidex &dex)
 
     for (int i = 0; i < 6; i++)
     {
-        Pokemon &p = dex.pokemon[equipe_gym5[i]];
+        Pokemon &p = dex.pokemon[equipe_gym5[i] - 1];
 
         gym5.time[i].id = p.id;
         gym5.time[i].nome = p.nome;
@@ -556,7 +584,7 @@ bool time_gym(Pokeltidex &dex)
 
     for (int i = 0; i < 6; i++)
     {
-        Pokemon &p = dex.pokemon[equipe_gym6[i]];
+        Pokemon &p = dex.pokemon[equipe_gym6[i] - 1];
 
         gym6.time[i].id = p.id;
         gym6.time[i].nome = p.nome;
@@ -572,7 +600,7 @@ bool time_gym(Pokeltidex &dex)
 
     for (int i = 0; i < 6; i++)
     {
-        Pokemon &p = dex.pokemon[equipe_gym7[i]];
+        Pokemon &p = dex.pokemon[equipe_gym7[i] - 1];
 
         gym7.time[i].id = p.id;
         gym7.time[i].nome = p.nome;
@@ -588,7 +616,7 @@ bool time_gym(Pokeltidex &dex)
 
     for (int i = 0; i < 6; i++)
     {
-        Pokemon &p = dex.pokemon[equipe_gym8[i]];
+        Pokemon &p = dex.pokemon[equipe_gym8[i] - 1];
 
         gym8.time[i].id = p.id;
         gym8.time[i].nome = p.nome;
@@ -600,7 +628,7 @@ bool time_gym(Pokeltidex &dex)
         gym8.time[i].poder_ataque = p.poder_ataque;
         gym8.time[i].special = p.special;
     }
-    return 1;
+    return;
 
 }
 
