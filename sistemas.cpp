@@ -25,11 +25,11 @@ void time_gym(Pokeltidex &dex);
 int luta(Time &mc, Time &npc,int &mc_desmaiados);
 
 string espera;//so para mim poder fazer nao apagar algo direto 
-// entao eu nao sei oq fazer entao vou ficar brincando com o codigo ate eu descobrir oq fazer
+
 int main()
 {
     srand(time(NULL)); 
-    bool gender; // Variável para armazenar o gênero do personagem.
+
     bool continua = true; // Variável para controlar o loop principal.
     int escolha;
     int mc_desmaiados=0;
@@ -38,15 +38,15 @@ int main()
     Time npc;
     Pokeltidex dex;
     
-    // so tem o problema da vida atual  mas isso ve depois 
+
 
     if (!carrega_tudo(dex))
     {
         cout << "Erro ao carregar a Pokedex!" << endl;
         return 1;
     }
-    cout << "Pokedex carregada!" << endl;
-    time_gym(dex);
+    cout << "Pokeltdex carregada!" << endl;
+    time_gym(dex);//carrega time lider de ginasio
     cout<< "time dos lideres de ginasio carregado"<<endl;
 
     aleatoriza_time(dex, mc, 1, npc);// tem que ter no inicio por preucaução
@@ -60,14 +60,13 @@ int main()
 
 
     cout << "time inicial carregado!" << endl;
-
-    cout << "Digite o gênero do personagem (1 para feminino, 0 para masculino): ";
-    cin >> gender; // Lê o gênero do personagem. aqui nao vai mudar nada no codigo
+    cout << "tudo carregado aperte qualquer botão para inicializar"<< endl;
+    cin >> espera;
     while (continua) // Loop infinito para manter o programa em execução.
     {
         system("cls||clear");
         cout << "oq você quer fazer?" << endl;
-        cout << "1 - Aleatorizar time | 2 - Centro Pokémon | 3 - Mochila | 4 - Batalhar" << endl;
+        cout << "1 - Aleatorizar Pokeltmons | 2 - Centro Pokeltmon | 3 - Mochila | 4 - Batalhar" << endl;
         cin >> escolha; 
         system("cls||clear");
         if (escolha == 1)
@@ -131,7 +130,7 @@ void aleatoriza_time(Pokeltidex &dex, Time &mc,bool npc_ou_mc, Time &npc)
     Pokemon time[6]; // Array para armazenar o time de 6 Pokémons do jogador. temporaria mente 
     if (npc_ou_mc==1)
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 1; i < 6; i++)//nao pode repitir
         {
             int indice = rand() % 100; // Gera um índice aleatório entre 0 e 99.
             time[i] = dex.pokemon[indice]; // Adiciona o Pokémon aleatório ao time.
@@ -175,7 +174,7 @@ void mochila (Time &mc , bool insignia[8])
     {
 
         cout << "O que você quer fazer?" << endl;
-        cout << "1 - Ver Pokémon | 2 - Ver itens | 3 - Ver insígnias | 4 - Sair" << endl;
+        cout << "1 - Ver Pokeltimon | 2 - Ver insígnias | 3 - Sair" << endl;
         cin >> escolha;
         if (escolha ==1)
         {
@@ -196,7 +195,7 @@ void mochila (Time &mc , bool insignia[8])
             cin >> escolha;
             if (escolha == 1)
             {
-                pokemon_time ajuda;
+                pokemon_time ajuda;//variavel auxiliar
                 int escolha2 =0;
                 cout << "Qual Pokémon deseja mover? (1-6):" << endl;
                 cin >> escolha;
@@ -221,24 +220,19 @@ void mochila (Time &mc , bool insignia[8])
                 mc.time[escolha2] = ajuda;
             }
         }
-        else if (escolha ==2)
-        {
-            
-            cout << "WIP";
-            
-        }
-        else if (escolha == 3 )
+        else if (escolha == 2 )
         {
             system("cls||clear");
             for (int i = 0; i < 8; i++)
             {
                 if (insignia[i]) 
                     cout << "Insignia " << i + 1 << ": Conquistada" << endl;
+                    
                 else 
                     cout << "Insignia " << i + 1 << ": Não conquistada" << endl;
             }
         }
-        else if (escolha == 4)
+        else if (escolha == 3)
         {
             mochila_aberta= false;
         }
@@ -323,8 +317,7 @@ void batalha (Time &mc, bool insignia[8], Pokeltidex &dex, Time npc,int &mc_desm
 }
 
 int luta(Time &mc, Time &npc,int &mc_desmaiados)
-{
-    int round =1;
+{// aqui ta indo sempre o primeiro slot tem que arrumar
     int vitoria = 0;
     int escolha_batalha;
     int especial_cont=0;
@@ -367,7 +360,7 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
     npc_campo.tipo=npc.time[poke_campo_slot_npc].tipo;
 
 
-    while (vitoria== 0)
+    while (vitoria == 0)
     {
         cout << "Seu pokeltimon " << mc_campo.nome << "  " << mc_campo.hp_atual << "/" << mc_campo.hp_maximo << endl; 
         cout << endl << endl;
@@ -398,7 +391,7 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
             {
                 cout << "Você usou o ataque especial!" << endl;
                 npc_campo.hp_atual -= ((mc_campo.poder_ataque*mc_campo.special/npc_campo.defesa)*afinidade(mc_campo.tipo,npc_campo.tipo));
-                especial_cont=0;// falta mutiplicar pela vantagem de tipo
+                especial_cont=0;
             }
             
         }
