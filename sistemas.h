@@ -1,8 +1,13 @@
-
-#ifndef ALEATORIZADOR_H
-#define ALEATORIZADOR_H
+#ifndef SISTEMAS_H
+#define SISTEMAS_H
 
 #include <string>
+#include <sstream>
+#include <iomanip>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
 
 struct Pokemon
 {
@@ -40,6 +45,16 @@ struct Time
     pokemon_time time[6];
 };
 
+void aleatoriza_time(Pokeltidex &dex, Time &mc, bool npc_ou_mc, Time &npc);
+
+void time_gym(Pokeltidex &dex);
+
+void mochila(Time &mc, bool insignia[8]);
+
+int luta(Time &mc, Time &npc, int &mc_desmaiados);
+
+void batalha(Time &mc, bool insignia[8], Pokeltidex &dex, Time npc, int &mc_desmaiados);
+
 bool carrega_tudo(Pokeltidex &dex);
 
 bool importa_do_arquivo(std::string id, std::string pokemon[]);
@@ -60,7 +75,6 @@ extern Time gym5;
 extern Time gym6;
 extern Time gym7;
 extern Time gym8;
-
 
 
 

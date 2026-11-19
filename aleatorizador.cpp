@@ -1,12 +1,8 @@
-#include "aleatorizador.h"
+#include "sistemas.h"
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
-
-using namespace std;
-
 
 bool importa_do_arquivo(string id, string pokemon[8])
 {
