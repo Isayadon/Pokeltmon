@@ -3,48 +3,21 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Compilar SFML 3",
-            "type": "process",
-            "command": "g++",
-            "args": [
-                "-std=c++17",
-                "${workspaceFolder}/janela.cpp",
-                "-o",
-                "${workspaceFolder}/janela",
-                "-I${env:HOME}/opt/SFML-3.1.0/include",
-                "-L${env:HOME}/opt/SFML-3.1.0/lib",
-                "-lsfml-graphics-s",
-                "-lsfml-window-s",
-                "-lsfml-system-s",
-                "-lGL",
-                "-lX11",
-                "-lXrandr",
-                "-lXcursor",
-                "-lXi",
-                "-ludev",
-                "-lfreetype",
-                "-lharfbuzz",
-                "-pthread"
-            ],
-            "problemMatcher": ["$gcc"]
-        },
-        {
-            "label": "Executar programa",
-            "type": "process",
-            "command": "${workspaceFolder}/janela",
-            "dependsOn": "Compilar SFML 3"
-        },
-        {
-            "label": "Compilar e executar",
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "Compilar SFML 3",
-                "Executar programa"
-            ],
+            "label": "Compilar Pokeltmon",
+            "type": "shell",
+            "command": "chcp 65001 | Out-Null; New-Item -ItemType Directory -Force output | Out-Null; g++ -std=c++17 -Wall -Wextra -g3 main.cpp sistema.cpp aleatorizador.cpp matriz_fraqueza.cpp mochila.cpp luta.cpp batalha.cpp -o output/Pokeltmon.exe",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                    "args": ["-NoProfile", "-Command"]
+                }
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": ["$gcc"]
         }
     ]
 }

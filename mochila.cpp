@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-void mochila (Time &mc , bool insignia[8])
+void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex)
 {
     bool mochila_aberta = true;
     int escolha;
@@ -10,9 +10,9 @@ void mochila (Time &mc , bool insignia[8])
     {
 
         cout << "O que você quer fazer?" << endl;
-        cout << "1 - Ver Pokeltimon | 2 - Ver insígnias | 3 - Sair" << endl;
+        cout << "1 - Ver Pokeltmons | 2 - Ver insígnias | 3 - Ver ID trainer | 4 - Sair." << endl;
         cin >> escolha;
-        if (escolha ==1)
+        if (escolha ==1)//ver pokeltmons
         {
             system("cls||clear"); 
             for(int i=0;i<6;i++)
@@ -50,7 +50,7 @@ void mochila (Time &mc , bool insignia[8])
                 {
                     cout << "Escolha inválida. Digite um número de 1 a 6." << endl;
                     cin >> escolha2;
-                    escolha--;
+                    escolha2--;
                 }
                 mc.time[escolha] = mc.time[escolha2];
                 mc.time[escolha2] = ajuda;
@@ -69,6 +69,17 @@ void mochila (Time &mc , bool insignia[8])
             }
         }
         else if (escolha == 3)
+        {
+            int encontrados=0;
+            for(int i=0;i<100;i++)
+            {
+                if (dex.pokemon[i].capturado == true)
+                    encontrados++;
+            }
+            cout << "Nome: " << nome_mc << endl;
+            cout << "Pokeltimons encontrados: " << encontrados << endl;
+        }
+        else if (escolha == 4)
         {
             mochila_aberta= false;
         }

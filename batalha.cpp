@@ -12,8 +12,8 @@ void batalha (Time &mc, bool insignia[8], Pokeltidex &dex, Time npc,int &mc_desm
     system("cls||clear");
     if (escolha == 0)
     {
-        
-        aleatoriza_time(dex, npc, 0,npc);
+        for(int i=0;i<6;i++)
+            aleatoriza_time(dex, npc, 0,npc,i);
         vitoria=luta(mc,npc,mc_desmaiados);
         //if(vitoria==1)
             // aqui é a implementação para xp caso faça depois

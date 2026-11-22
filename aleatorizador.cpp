@@ -6,7 +6,7 @@
 
 bool importa_do_arquivo(string id, string pokemon[8])
 {
-    ifstream file("Pokemons.txt");
+    ifstream file("pokeltdex.txt");
 
     if (!file.is_open())
     {

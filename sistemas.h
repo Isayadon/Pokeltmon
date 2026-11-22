@@ -14,9 +14,9 @@ struct Pokemon
     int id;
     std::string nome;
     std::string tipo;
-    int hp;
     int ataque;
     int defesa;
+    int hp;
     int poder_ataque;
     int special;
     bool capturado;
@@ -45,11 +45,11 @@ struct Time
     pokemon_time time[6];
 };
 
-void aleatoriza_time(Pokeltidex &dex, Time &mc, bool npc_ou_mc, Time &npc);
+void aleatoriza_time(Pokeltidex &dex, Time &mc, bool npc_ou_mc, Time &npc,int troca);
 
 void time_gym(Pokeltidex &dex);
 
-void mochila(Time &mc, bool insignia[8]);
+void mochila(Time &mc, bool insignia[8], string nome_mc,Pokeltidex &dex);
 
 int luta(Time &mc, Time &npc, int &mc_desmaiados);
 

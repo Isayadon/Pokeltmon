@@ -7,11 +7,14 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
     string espera;//so para mim poder fazer nao apagar algo direto 
     int vitoria = 0;
     int escolha_batalha;
-    int especial_cont=0;
+    int especial_cont_mc=0;
+    int especial_cont_npc=0;
     int troca;
     int poke_campo_slot_mc=0;
     int poke_campo_slot_npc=0;
-    
+    while (mc.time[poke_campo_slot_mc].hp_atual<=0)
+        poke_campo_slot_mc++;
+
     struct pokemon_em_campo
     {
         string nome;
@@ -69,16 +72,16 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
 
         if (escolha_batalha == 1)
         {
-            if (especial_cont != 5)
+            if ( especial_cont_mc!= 5)
             {
                 npc_campo.hp_atual -= ((mc_campo.poder_ataque*mc_campo.ataque/npc_campo.defesa)*afinidade(mc_campo.tipo,npc_campo.tipo));
-                especial_cont++;
+                especial_cont_mc++;
             }
             else 
             {
                 cout << "Você usou o ataque especial!" << endl;
-                npc_campo.hp_atual -= ((mc_campo.poder_ataque*mc_campo.special/npc_campo.defesa)*afinidade(mc_campo.tipo,npc_campo.tipo));
-                especial_cont=0;
+                npc_campo.hp_atual -= ((mc_campo.ataque*mc_campo.special/npc_campo.defesa)*afinidade(mc_campo.tipo,npc_campo.tipo));
+                especial_cont_mc=0;
             }
             
         }
@@ -114,11 +117,12 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
         else if (escolha_batalha == 3)
         {
             int chance_fuga;
-            chance_fuga=rand()%30;
+            chance_fuga=rand()%30 +1;
             if ((chance_fuga%2)==0 && (chance_fuga%3)==0)
             {
                 cout << "Você fugiu da batalha!" << endl;
                 vitoria = 2;
+                mc.time[poke_campo_slot_mc].hp_atual=mc_campo.hp_atual;
             }
             else 
                 cout << "Você não conseguiu fugir!" << endl;
@@ -126,9 +130,19 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
         }
         
         
-        if (vitoria==0&&npc_campo.hp_atual>0)// para que o npc nao ataque caso voce corra
-            mc_campo.hp_atual -= ((npc_campo.poder_ataque*npc_campo.ataque/mc_campo.defesa)*afinidade(mc_campo.tipo,npc_campo.tipo));
-
+        if (vitoria==0&&npc_campo.hp_atual>0)
+        {// para que o npc nao ataque caso voce corra
+            if (especial_cont_npc!=5)
+            {
+            mc_campo.hp_atual -= ((npc_campo.poder_ataque*npc_campo.ataque/mc_campo.defesa)*afinidade(npc_campo.tipo,mc_campo.tipo));
+            especial_cont_npc++;
+            }
+            else 
+            {
+            mc_campo.hp_atual -= ((npc_campo.ataque*npc_campo.special/mc_campo.defesa)*afinidade(npc_campo.tipo,mc_campo.tipo));
+            especial_cont_npc=0;
+            }
+        }
         
 
         if (npc_campo.hp_atual<=0 && poke_campo_slot_npc<5)

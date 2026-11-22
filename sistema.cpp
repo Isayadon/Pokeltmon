@@ -30,9 +30,9 @@ bool carrega_tudo(Pokeltidex &dex)
         dex.pokemon[i].id = stoi(dados[0]); //o stoi converte string para int
         dex.pokemon[i].nome = dados[1];
         dex.pokemon[i].tipo = dados[2];
-        dex.pokemon[i].hp = stoi(dados[3]);
         dex.pokemon[i].ataque = stoi(dados[4]);
         dex.pokemon[i].defesa = stoi(dados[5]);
+        dex.pokemon[i].hp = stoi(dados[3]);
         dex.pokemon[i].poder_ataque = stoi(dados[6]);
         dex.pokemon[i].special = stoi(dados[7]);
 
@@ -41,44 +41,58 @@ bool carrega_tudo(Pokeltidex &dex)
 
     return true;
 }
-void aleatoriza_time(Pokeltidex &dex, Time &mc,bool npc_ou_mc, Time &npc)
+void aleatoriza_time(Pokeltidex &dex, Time &mc,bool npc_ou_mc, Time &npc,int troca)
 {
-    Pokemon time[6]; // Array para armazenar o time de 6 Pokémons do jogador. temporaria mente 
+    Pokemon time; // Array para armazenar o time de 6 Pokémons do jogador. temporaria mente 
+
     if (npc_ou_mc==1)
     {
-        for (int i = 1; i < 6; i++)//nao pode repitir
+
+        int indice = rand() % 100; // Gera um índice aleatório entre 0 e 99.
+        for(int f=0;f<6;f++)
         {
-            int indice = rand() % 100; // Gera um índice aleatório entre 0 e 99.
-            time[i] = dex.pokemon[indice]; // Adiciona o Pokémon aleatório ao time.
-            // aqui vai fazer o pokemon do time do slot correspondente receba os dados do pokemon aleatorio que foi escolhido
-            mc.time[i].id = time[i].id;
-            mc.time[i].nome = time[i].nome;
-            mc.time[i].tipo = time[i].tipo;
-            mc.time[i].hp_atual = time[i].hp; // Define o HP atual como o HP máximo do Pokémon.
-            mc.time[i].hp_maximo = time[i].hp;
-            mc.time[i].ataque = time[i].ataque;
-            mc.time[i].defesa = time[i].defesa;
-            mc.time[i].poder_ataque = time[i].poder_ataque;
-            mc.time[i].special = time[i].special;
+            if((mc.time[f].id - 1)== indice)
+            {
+                indice = rand() % 100;
+                f=-1;// eu ia colocar 0 mas o f++ do for ia me ferrar entao tiro 1 primeiro
+            }
         }
+        time = dex.pokemon[indice]; // Adiciona o Pokémon aleatório ao time.
+        // aqui vai fazer o pokemon do time do slot correspondente receba os dados do pokemon aleatorio que foi escolhido
+        mc.time[troca].id = time.id;
+        mc.time[troca].nome = time.nome;
+        mc.time[troca].tipo = time.tipo;
+        mc.time[troca].hp_atual = time.hp; // Define o HP atual como o HP máximo do Pokémon.
+        mc.time[troca].hp_maximo = time.hp;
+        mc.time[troca].ataque = time.ataque;
+        mc.time[troca].defesa = time.defesa;
+        mc.time[troca].poder_ataque = time.poder_ataque;
+        mc.time[troca].special = time.special;
+        dex.pokemon[indice].capturado = true;
     }
     else 
     {
-        for (int i = 0; i < 6; i++)
+    int indice = rand() % 100; // Gera um índice aleatório entre 0 e 99.
+    for(int f=0;f<6;f++)
         {
-            int indice = rand() % 100; // Gera um índice aleatório entre 0 e 99.
-            time[i] = dex.pokemon[indice]; // Adiciona o Pokémon aleatório ao time.
-            // aqui vai fazer o pokemon do time do slot correspondente receba os dados do pokemon aleatorio que foi escolhido
-            npc.time[i].id = time[i].id;
-            npc.time[i].nome = time[i].nome;
-            npc.time[i].tipo = time[i].tipo;
-            npc.time[i].hp_atual = time[i].hp; // Define o HP atual como o HP máximo do Pokémon.
-            npc.time[i].hp_maximo = time[i].hp;
-            npc.time[i].ataque = time[i].ataque;
-            npc.time[i].defesa = time[i].defesa;
-            npc.time[i].poder_ataque = time[i].poder_ataque;
-            npc.time[i].special = time[i].special;
+            if((mc.time[f].id - 1)== indice)
+            {
+                indice = rand() % 100;
+                f=-1;// eu ia colocar 0 mas o f++ do for ia me ferrar entao tiro 1 primeiro
+            }
         }
+        
+        time = dex.pokemon[indice]; // Adiciona o Pokémon aleatório ao time.
+        // aqui vai fazer o pokemon do time do slot correspondente receba os dados do pokemon aleatorio que foi escolhido
+        npc.time[troca].id = time.id;
+        npc.time[troca].nome = time.nome;
+        npc.time[troca].tipo = time.tipo;
+        npc.time[troca].hp_atual = time.hp; // Define o HP atual como o HP máximo do Pokémon.
+        npc.time[troca].hp_maximo = time.hp;
+        npc.time[troca].ataque = time.ataque;
+        npc.time[troca].defesa = time.defesa;
+        npc.time[troca].poder_ataque = time.poder_ataque;
+        npc.time[troca].special = time.special;
     }
 }
 void time_gym(Pokeltidex &dex)

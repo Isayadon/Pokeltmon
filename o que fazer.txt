@@ -1,0 +1,14 @@
+ler o arquivo pokeltdex.txt
+era 5 pokeltimons mas fizemos 6 
+todos tem que ser diferente mas atualmente pode repetir
+
+
+Alterações na Mochila;  || feito
+Ir ao Healing Center;  || feito
+Ir ao Ginásio de Batalha;  || feito
+Mostrar Insígnias  || sem sprite
+Sair do jogo. || feito
+Entradas invalidas || bom revisar
+
+
+obs na verdade oq aconteceu foi que na batalha nao era para ter npc entao meio que fizemos a mais isso
