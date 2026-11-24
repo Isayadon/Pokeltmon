@@ -9,46 +9,64 @@ void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex)
     while(mochila_aberta)
     {
 
-        cout << "O que você quer fazer?" << endl;
-        cout << "1 - Ver Pokeltmons | 2 - Ver insígnias | 3 - Ver ID trainer | 4 - Sair." << endl;
+        cout << "╭──────────────────────────────╮" << endl;
+        cout << "│          ♡ MOCHILA ♡         │" << endl;
+        cout << "├──────────────────────────────┤" << endl;
+        cout << "│  1. ✧ Ver Pokeltmons         │" << endl;
+        cout << "│  2. ♡ Ver insignias          │" << endl;
+        cout << "│  3. ID do treinador          │" << endl;
+        cout << "│  4. Sair                     │" << endl;
+        cout << "╰──────────────────────────────╯" << endl;
+
+        cout << " " << endl;
+
         cin >> escolha;
         if (escolha ==1)//ver pokeltmons
         {
             system("cls||clear"); 
-            for(int i=0;i<6;i++)
+            for(int i=0;i<5;i++)
             {
-                cout << "Pokeltimon " << i + 1 << ": " << mc.time[i].nome << endl;
-                cout << "Tipo: " << mc.time[i].tipo << endl;
-                cout << "HP Atual: " << mc.time[i].hp_atual << endl;
-                cout << "HP: " << mc.time[i].hp_maximo << endl;
-                cout << "Ataque: " << mc.time[i].ataque << endl;
-                cout << "Defesa: " << mc.time[i].defesa << endl;
-                cout << "poder_ataque: " << mc.time[i].poder_ataque << endl;
-                cout << "Special: " << mc.time[i].special << endl;
-                cout << endl;
+                cout << "  " << endl;
+                
+                cout << "♡ POKEMON: " << i + 1 << ": " << mc.time[i].nome << endl;
+                cout << " " << endl;
+                cout << "❖ Tipo: " << mc.time[i].tipo << endl;
+                cout << "-----------------------" << endl;
+                cout << "♥ HP Atual: " << mc.time[i].hp_atual << endl;
+                cout << "-----------------------" << endl;
+                cout << "♡ HP: " << mc.time[i].hp_maximo << endl;
+                cout << "-----------------------" << endl;
+                cout << "⚔ Ataque: " << mc.time[i].ataque << endl;
+                cout << "-----------------------" << endl;
+                cout << "🛡 Defesa: " << mc.time[i].defesa << endl;
+                cout << "-----------------------" << endl;
+                cout << "✦ Poder de Ataque: " << mc.time[i].poder_ataque << endl;
+                cout << "-----------------------" << endl;
+                cout << "✧ Special: " << mc.time[i].special << endl;
+                cout << "-----------------------" << endl;
             }
-            cout << "Deseja trocar algum Pokémon de lugar? (1 - Sim / 0 - Não)" << endl;
+            cout << "✧ Deseja trocar algum Pokémon de lugar? [ 1 - Sim ] [ 0 - Não ] ✧ " << endl;
             cin >> escolha;
             if (escolha == 1)
             {
-                pokemon_time ajuda;//variavel auxiliar
+                pokemon_time ajuda;
                 int escolha2 =0;
-                cout << "Qual Pokémon deseja mover? (1-6):" << endl;
+                cout << "Qual Pokémon deseja mover? (1-5):" << endl;
                 cin >> escolha;
                 escolha--;
-                while (escolha < 0 || escolha > 5)
+                while (escolha < 0 || escolha > 4)
                 {
-                    cout << "Escolha inválida. Digite um número de 1 a 6." << endl;
+                    cout << "Escolha inválida. Digite um número de 1 a 5." << endl;
                     cin >> escolha;
                     escolha--;
                 }
                 ajuda = mc.time[escolha];
-                cout << "Qual Pokémon deseja colocar no lugar do escolhido? (1-6):" << endl;
+                cout << "Qual Pokémon deseja colocar no lugar do escolhido? (1-5):" << endl;
                 cin >> escolha2;
                 escolha2--;
-                while (escolha2 < 0 || escolha2 > 5)
+                while (escolha2 < 0 || escolha2 > 4)
                 {
-                    cout << "Escolha inválida. Digite um número de 1 a 6." << endl;
+                    cout << "Escolha inválida. Digite um número de 1 a 5." << endl;
                     cin >> escolha2;
                     escolha2--;
                 }
@@ -77,7 +95,7 @@ void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex)
                     encontrados++;
             }
             cout << "Nome: " << nome_mc << endl;
-            cout << "Pokeltimons encontrados: " << encontrados << endl;
+            cout << "❖ Pokeltimons encontrados: " << encontrados << endl;
         }
         else if (escolha == 4)
         {

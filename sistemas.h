@@ -12,8 +12,8 @@ using namespace std;
 struct Pokemon
 {
     int id;
-    std::string nome;
-    std::string tipo;
+    string nome;
+    string tipo;
     int ataque;
     int defesa;
     int hp;
@@ -30,8 +30,8 @@ struct Pokeltidex
 struct pokemon_time
 {
     int id;
-    std::string nome;
-    std::string tipo;
+    string nome;
+    string tipo;
     int hp_atual;
     int hp_maximo;
     int ataque;
@@ -42,7 +42,7 @@ struct pokemon_time
 
 struct Time
 {
-    pokemon_time time[6];
+    pokemon_time time[5];
 };
 
 void aleatoriza_time(Pokeltidex &dex, Time &mc, bool npc_ou_mc, Time &npc,int troca);

@@ -1,8 +1,8 @@
 #include <string>
+using namespace std;
 
 
-
-int transforma_tipo(const std::string& tipo)
+int transforma_tipo(const string& tipo)
 {
     if(tipo == "Normal")
         return 0;
@@ -69,7 +69,7 @@ float fraqueza(int tipo_ataque, int tipo_defesa)
 }
 
 
-float afinidade(const std::string& tipo_ata, const std::string& tipo_def)
+float afinidade(const string& tipo_ata, const string& tipo_def)
 {
     float ajuda;
     ajuda = fraqueza(transforma_tipo(tipo_ata),transforma_tipo(tipo_def));

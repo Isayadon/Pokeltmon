@@ -1,24 +1,33 @@
 #include "sistemas.h"
-
 #include <iostream>
+using namespace std;
 
 void batalha (Time &mc, bool insignia[8], Pokeltidex &dex, Time npc,int &mc_desmaiados)
 {
-    bool escolha;
+    int escolha; //usei int para armazenar a opção escolhida e conseguir validar entradas diferentes de 0 e 1
     int vitoria;
     cout << "Contra quem você quer batalhar?" << endl;
     cout << "0 - NPC | 1 - Líder de ginásio" << endl;
     cin >> escolha;
+
+    //Repete a pergunta enquanto o jogador não escolher 0 (NPC) ou 1 (Líder de ginásio)
+
+    while(escolha != 0 && escolha != 1) { 
+
+        cout << "Escolha invalida. Digite 0 para NPC ou 1 para Líder de ginásio." << endl;
+        cin >> escolha;
+    }
+    
     system("cls||clear");
     if (escolha == 0)
     {
-        for(int i=0;i<6;i++)
+        for(int i=0;i<5;i++)
             aleatoriza_time(dex, npc, 0,npc,i);
         vitoria=luta(mc,npc,mc_desmaiados);
         //if(vitoria==1)
             // aqui é a implementação para xp caso faça depois
     }
-    else// escolha bool ou 1 ou zero
+    else // escolha == 1: batalha contra líder de ginásio
     {
         if (insignia[7]==1)
         {

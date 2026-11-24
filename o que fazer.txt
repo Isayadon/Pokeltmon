@@ -1,14 +1,27 @@
 ler o arquivo pokeltdex.txt
-era 5 pokeltimons mas fizemos 6 
-todos tem que ser diferente mas atualmente pode repetir
+
+era 5 pokeltimons mas fizemos 6 || Isa aq fez a correção já para 5 pokemons.
 
 
 Alterações na Mochila;  || feito
+
 Ir ao Healing Center;  || feito
+
 Ir ao Ginásio de Batalha;  || feito
+
 Mostrar Insígnias  || sem sprite
+
 Sair do jogo. || feito
+
 Entradas invalidas || bom revisar
 
 
-obs na verdade oq aconteceu foi que na batalha nao era para ter npc entao meio que fizemos a mais isso
+obs na verdade oq aconteceu foi que na batalha nao era para ter npc entao meio que fizemos a mais isso || blz meu nobre tmj mlk
+
+
+
+//FIZ DECORAÇÕES NO JOGO, TA MAIS BONITO (AINDA NAO TERMINEI NAO MEXE)
+
+
+
+//FAZER O README!!

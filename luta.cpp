@@ -3,8 +3,8 @@
 #include <iostream>
 
 int luta(Time &mc, Time &npc,int &mc_desmaiados)
-{// aqui ta indo sempre o primeiro slot tem que arrumar
-    string espera;//so para mim poder fazer nao apagar algo direto 
+{
+    string espera;
     int vitoria = 0;
     int escolha_batalha;
     int especial_cont_mc=0;
@@ -87,14 +87,14 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
         }
         else if (escolha_batalha == 2)
         {
-            for (int h=0; h<6;h++)
+            for (int h=0; h<5;h++)
             {
                 cout << mc.time[h].nome << "   "  << mc.time[h].hp_atual << "/" << mc.time[h].hp_maximo << endl;
             }
-            cout << "Trocar o Pokémon em campo por qual? (1-6):"<<endl;
+            cout << "Trocar o Pokémon em campo por qual? (1-5):"<<endl;
             cin >> troca;
             troca--;
-            while (troca == poke_campo_slot_mc || troca > 5|| troca < 0 || mc.time[troca].hp_atual==0)
+            while (troca == poke_campo_slot_mc || troca >= 5 || troca < 0 || mc.time[troca].hp_atual==0)
             {
                 cout<<"Entrada inválida. Escolha outro Pokémon:"<<endl;
                 cin >> troca;
@@ -102,7 +102,7 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
             }
             system("cls||clear");
 
-            mc.time[poke_campo_slot_mc].hp_atual=mc_campo.hp_atual;// salva o dano 
+            mc.time[poke_campo_slot_mc].hp_atual=mc_campo.hp_atual;
 
             mc_campo.nome=mc.time[troca].nome;
             mc_campo.hp_atual=mc.time[troca].hp_atual;
@@ -145,7 +145,7 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
         }
         
 
-        if (npc_campo.hp_atual<=0 && poke_campo_slot_npc<5)
+        if (npc_campo.hp_atual<=0 && poke_campo_slot_npc<4)
         {
             poke_campo_slot_npc++;
             npc_campo.nome=npc.time[poke_campo_slot_npc].nome;
@@ -158,7 +158,7 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
             npc_campo.tipo=npc.time[poke_campo_slot_npc].tipo;
 
         }
-        else if (npc_campo.hp_atual <= 0 && poke_campo_slot_npc >= 5)
+        else if (npc_campo.hp_atual <= 0 && poke_campo_slot_npc >= 4)
         {
             mc.time[poke_campo_slot_mc].hp_atual=mc_campo.hp_atual;
             cout << "Você ganhou!"<<endl;
@@ -171,14 +171,14 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
             mc_campo.hp_atual=0; // para nao ter vida negativa
             mc.time[poke_campo_slot_mc].hp_atual = 0;
             cout << "Seu Pokeltimon desmaiou!"<<endl<<endl;
-            for (int h=0; h<6;h++)
+            for (int h=0; h<5;h++)
             {
                 cout << mc.time[h].nome << "   "  << mc.time[h].hp_atual << "/" << mc.time[h].hp_maximo << endl;
             }
             cout <<endl << "Escolha o próximo Pokeltimon:" << endl;
             cin >> troca;
             troca--;
-            while (troca == poke_campo_slot_mc || troca > 5|| troca < 0 || mc.time[troca].hp_atual==0)
+            while (troca == poke_campo_slot_mc || troca >= 5|| troca < 0 || mc.time[troca].hp_atual==0)
             {
                 cout<<"Entrada inválida. Escolha outro Pokeltimon:"<<endl;
                 cin >> troca;

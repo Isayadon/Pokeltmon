@@ -43,18 +43,18 @@ bool carrega_tudo(Pokeltidex &dex)
 }
 void aleatoriza_time(Pokeltidex &dex, Time &mc,bool npc_ou_mc, Time &npc,int troca)
 {
-    Pokemon time; // Array para armazenar o time de 6 Pokémons do jogador. temporaria mente 
+    Pokemon time; //Guarda temporariamente os dados do Pokemon aleatório selecionado.
 
     if (npc_ou_mc==1)
     {
 
         int indice = rand() % 100; // Gera um índice aleatório entre 0 e 99.
-        for(int f=0;f<6;f++)
+        for(int f = 0; f < 5; f++)
         {
             if((mc.time[f].id - 1)== indice)
             {
                 indice = rand() % 100;
-                f=-1;// eu ia colocar 0 mas o f++ do for ia me ferrar entao tiro 1 primeiro
+                f=-1;
             }
         }
         time = dex.pokemon[indice]; // Adiciona o Pokémon aleatório ao time.
@@ -72,10 +72,10 @@ void aleatoriza_time(Pokeltidex &dex, Time &mc,bool npc_ou_mc, Time &npc,int tro
     }
     else 
     {
-    int indice = rand() % 100; // Gera um índice aleatório entre 0 e 99.
-    for(int f=0;f<6;f++)
+    int indice = rand() % 100;
+    for(int f=0;f<5;f++)
         {
-            if((mc.time[f].id - 1)== indice)
+            if((npc.time[f].id - 1)== indice)
             {
                 indice = rand() % 100;
                 f=-1;// eu ia colocar 0 mas o f++ do for ia me ferrar entao tiro 1 primeiro
@@ -97,9 +97,9 @@ void aleatoriza_time(Pokeltidex &dex, Time &mc,bool npc_ou_mc, Time &npc,int tro
 }
 void time_gym(Pokeltidex &dex)
 {
-    int equipe_gym1[6] = {74, 75, 76, 95, 28, 50};
+    int equipe_gym1[5] = {74, 75, 76, 95, 28};
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         Pokemon &p = dex.pokemon[equipe_gym1[i] - 1];
 
@@ -113,9 +113,9 @@ void time_gym(Pokeltidex &dex)
         gym1.time[i].poder_ataque = p.poder_ataque;
         gym1.time[i].special = p.special;
     }
-    int equipe_gym2[6] = {7, 8, 9, 55, 62, 99};
+    int equipe_gym2[5] = {7, 8, 9, 55, 62};
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         Pokemon &p = dex.pokemon[equipe_gym2[i] - 1];
         gym2.time[i].id = p.id;
@@ -128,9 +128,9 @@ void time_gym(Pokeltidex &dex)
         gym2.time[i].poder_ataque = p.poder_ataque;
         gym2.time[i].special = p.special;
     }
-    int equipe_gym3[6] = {25, 26, 81, 82, 100, 51};
+    int equipe_gym3[5] = {25, 26, 81, 82, 100};
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         Pokemon &p = dex.pokemon[equipe_gym3[i] - 1];
 
@@ -144,9 +144,9 @@ void time_gym(Pokeltidex &dex)
         gym3.time[i].poder_ataque = p.poder_ataque;
         gym3.time[i].special = p.special;
     }
-    int equipe_gym4[6] = {1, 2, 3, 43, 44, 69};
+    int equipe_gym4[5] = {1, 2, 3, 43, 44};
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         Pokemon &p = dex.pokemon[equipe_gym4[i] - 1];
 
@@ -160,9 +160,9 @@ void time_gym(Pokeltidex &dex)
         gym4.time[i].poder_ataque = p.poder_ataque;
         gym4.time[i].special = p.special;
     }
-    int equipe_gym5[6] = {23, 24, 29, 30, 48, 73};
+    int equipe_gym5[5] = {23, 24, 29, 30, 48};
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         Pokemon &p = dex.pokemon[equipe_gym5[i] - 1];
 
@@ -176,9 +176,9 @@ void time_gym(Pokeltidex &dex)
         gym5.time[i].poder_ataque = p.poder_ataque;
         gym5.time[i].special = p.special;
     }
-    int equipe_gym6[6] = {63, 64, 65, 79, 80, 97};
+    int equipe_gym6[5] = {63, 64, 65, 79, 80};
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         Pokemon &p = dex.pokemon[equipe_gym6[i] - 1];
 
@@ -192,9 +192,9 @@ void time_gym(Pokeltidex &dex)
         gym6.time[i].poder_ataque = p.poder_ataque;
         gym6.time[i].special = p.special;
     }
-    int equipe_gym7[6] = {4, 5, 6, 37, 38, 59};
+    int equipe_gym7[5] = {4, 5, 6, 37, 38};
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         Pokemon &p = dex.pokemon[equipe_gym7[i] - 1];
 
@@ -208,9 +208,9 @@ void time_gym(Pokeltidex &dex)
         gym7.time[i].poder_ataque = p.poder_ataque;
         gym7.time[i].special = p.special;
     }
-    int equipe_gym8[6] = {27, 28, 50, 51, 31, 34};
+    int equipe_gym8[5] = {27, 28, 50, 51, 31};
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         Pokemon &p = dex.pokemon[equipe_gym8[i] - 1];
 

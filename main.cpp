@@ -20,15 +20,20 @@ int main()
 
     if (!carrega_tudo(dex))
     {
-        cout << "Erro ao carregar a Pokedex!" << endl;
+        cout << "Erro ao carregar a Pokedex! :( " << endl;
         return 1;
     }
-    cout << "Pokeltdex carregada!" << endl;
-    time_gym(dex);//carrega time lider de ginasio
-    cout<< "time dos lideres de ginasio carregado"<<endl;
+    cout << "✧ Pokeltdex Carregada! ✧" << endl;
 
-    for (int i=0;i<6;i++)
-        aleatoriza_time(dex, mc, 1, npc, i);// tem que ter no inicio por preucaução
+    cout << " " << endl;
+
+    time_gym(dex);
+    cout<< "✧ Time dos lideres de ginasio carregado! ✧"<<endl;
+
+    cout << " " << endl;
+
+    for (int i=0;i<5;i++)
+        aleatoriza_time(dex, mc, 1, npc, i);
 
 
     // Inicializa todas as insígnias como não conquistadas.
@@ -38,27 +43,45 @@ int main()
     }
 
 
-    cout << "time inicial carregado!" << endl;
-    cout << "tudo carregado !!!"<< endl;
-    cout << "digite o seu nome" << endl;
+    cout << "✧ Time inicial carregado! ✧" << endl;
+
+    cout << " " << endl;
+
+    cout << "✧ Tudo carregado! ✧"<< endl;
+
+    cout << " " << endl;
+
+    cout << "✧ Digite o seu nome: " << endl;
+
     cin >> nome_mc;
+
     while (continua) // Loop infinito para manter o programa em execução.
     {
         system("cls||clear");
-        cout << "oq você quer fazer?" << endl;
-        cout << "1 - Aleatorizar Pokeltmons | 2 - Centro Pokeltmon | 3 - Mochila | 4 - Batalhar" << endl;
+        cout << "╭────────────────────────────╮" << endl;
+        cout << "│       ♡ POKELTMON ♡        │" << endl;
+        cout << "├────────────────────────────┤" << endl;
+        cout << "│  1. ✧ Aleatorizar time     │" << endl;
+        cout << "│  2. ♡ Centro Pokeltmon     │" << endl;
+        cout << "│  3. Mochila                │" << endl;
+        cout << "│  4. ⚔ Batalhar             │" << endl;
+        cout << "│  5. Sair                   │" << endl;
+        cout << "╰────────────────────────────╯" << endl;
+        
+        cout << "  Escolha: ";
+
         cin >> escolha; 
         system("cls||clear");
         if (escolha == 1)
         {
             int troca;
-            for(int i=0;i<6;i++)
+            for(int i=0;i<5;i++)
             {
                 cout << "Pokeltimon " << i + 1 << ": " << mc.time[i].nome << endl;
             }
-            cout << "Qual deles voce quer trocar?" << endl;
+            cout << "✧ Qual deles voce quer trocar? ✧" << endl;
             cin >> troca;
-            while (troca<1 || troca >6)
+            while (troca<1 || troca >5)
             {
                 cout << "escolha invalida" << endl;
                 cin >> troca;
@@ -68,16 +91,21 @@ int main()
                 mc_desmaiados--;
             aleatoriza_time(dex, mc, 1, npc,troca); // Chama a função para aleatorizar o time de Pokémons
         }
-        else if (escolha == 2)//centro pokemon
+        else if (escolha == 2) //Healing Pokeltmons
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 5; i++)
             {
                 mc.time[i].hp_atual = mc.time[i].hp_maximo; // Restaura o HP atual para o HP máximo.
             }
             mc_desmaiados=0;
-            cout << "Todos os Pokémons foram curados!" << endl;
-            cout << "digite qualquer coisa para voltar ao menu "<<endl;
-            cin >> espera;// sla aqui é so para nao ir direto docentro e apagar a mensagemque avisa
+            cout << "\n╭────────────────────────────────────╮" << endl;
+            cout << "│    ♡ TODOS FORAM CURADOS! ♡        │" << endl;
+            cout << "╰────────────────────────────────────╯" << endl;
+
+            cout << " " << endl;
+
+            cout << "✧ Digite qualquer coisa para voltar ao menu ✧"<<endl;
+            cin >> espera;//sla aqui é so para nao ir direto do centro e apagar a mensagem que avisa
         }
         else if (escolha == 3)//ver mochila
         {
@@ -86,7 +114,7 @@ int main()
         else if (escolha == 4)//batalha
         {
             if (mc_desmaiados >= 5)
-                cout << "Seus Pokeltimon estao desmaiados va ao Centro Pokeltimon";
+                cout << "✧ Seus Pokeltimon estao desmaiados va ao Centro Pokeltimon ✧";
             else 
                 batalha(mc,insignia,dex,npc,mc_desmaiados); 
         }
