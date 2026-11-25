@@ -49,7 +49,7 @@ void aleatoriza_time(Pokeltidex &dex, Time &mc, bool npc_ou_mc, Time &npc,int tr
 
 void time_gym(Pokeltidex &dex);
 
-void mochila(Time &mc, bool insignia[8], string nome_mc,Pokeltidex &dex);
+void mochila(Time &mc, bool insignia[8], string nome_mc,Pokeltidex &dex,int sprite[8]);
 
 int luta(Time &mc, Time &npc, int &mc_desmaiados);
 

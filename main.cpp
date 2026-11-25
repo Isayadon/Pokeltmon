@@ -15,7 +15,7 @@ int main()
     Time mc{};
     Time npc{};
     Pokeltidex dex;
-    
+    int sprite[8];
 
 
     if (!carrega_tudo(dex))
@@ -41,6 +41,14 @@ int main()
     {
         insignia[i] = false; // Inicializa todas as insígnias como não conquistadas.
     }
+    sprite[0]=1;
+    sprite[1]=2;
+    sprite[2]=3;
+    sprite[3]=4;
+    sprite[4]=5;
+    sprite[5]=6;
+    sprite[6]=7;
+    sprite[7]=8;
 
 
     cout << "✧ Time inicial carregado! ✧" << endl;
@@ -133,7 +141,7 @@ int main()
         }
         else if (escolha == 3)//ver mochila
         {
-            mochila(mc,insignia,nome_mc,dex); // Chama a função para exibir a mochila e permitir interações com os Pokémons.
+            mochila(mc,insignia,nome_mc,dex,sprite); // Chama a função para exibir a mochila e permitir interações com os Pokémons.
         }
         else if (escolha == 4)//batalha
         {

@@ -92,7 +92,7 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
 
         if (escolha_batalha == 1)
         {
-            if ( especial_cont_mc!= 5)
+            if ( especial_cont_mc!= 4)
             {
                 npc_campo.hp_atual -= ((mc_campo.poder_ataque*mc_campo.ataque/npc_campo.defesa)*afinidade(mc_campo.tipo,npc_campo.tipo));
                 especial_cont_mc++;
@@ -158,19 +158,18 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
                 cout << "୭ Você não conseguiu fugir! ୭" << endl;
             
         }
-        cout << "  " << endl;
         
         if (vitoria==0&&npc_campo.hp_atual>0)
         {// para que o npc nao ataque caso voce corra
-            if (especial_cont_npc!=5)
+            if (especial_cont_npc!=4)
             {
-            mc_campo.hp_atual -= ((npc_campo.poder_ataque*npc_campo.ataque/mc_campo.defesa)*afinidade(npc_campo.tipo,mc_campo.tipo));
-            especial_cont_npc++;
+                mc_campo.hp_atual -= ((npc_campo.poder_ataque*npc_campo.ataque/mc_campo.defesa)*afinidade(npc_campo.tipo,mc_campo.tipo));
+                especial_cont_npc++;
             }
             else 
             {
-            mc_campo.hp_atual -= ((npc_campo.ataque*npc_campo.special/mc_campo.defesa)*afinidade(npc_campo.tipo,mc_campo.tipo));
-            especial_cont_npc=0;
+                mc_campo.hp_atual -= ((npc_campo.ataque*npc_campo.special/mc_campo.defesa)*afinidade(npc_campo.tipo,mc_campo.tipo));
+                especial_cont_npc=0;
             }
         }
         
@@ -226,7 +225,8 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
                 
                 vitoria = 2;
             }
-            else {
+            else 
+            {
                 cout << "୭ Seu Pokeltimon desmaiou! ୭" << endl << endl;
 
                 cout << "\n♡ SEU TIME ♡" << endl;
@@ -235,29 +235,29 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
 
             
 
-            for (int h = 0; h < 5; h++)
-            {
-                cout << "[" << h + 1 << "] ✧ " << mc.time[h].nome;
+                for (int h = 0; h < 5; h++)
+                {
+                    cout << "[" << h + 1 << "] ✧ " << mc.time[h].nome;
 
-                cout << "  | HP: " << mc.time[h].hp_atual << "/" << mc.time[h].hp_maximo << endl;
-            }
+                    cout << "  | HP: " << mc.time[h].hp_atual << "/" << mc.time[h].hp_maximo << endl;
+                }
 
-            cout << "===============================" << endl;
+                cout << "===============================" << endl;
 
-            cout << "  " << endl;
+                cout << "  " << endl;
 
-            cout << "✧ Escolha seu proximo Pokeltimon: " << endl;
+                cout << "✧ Escolha seu proximo Pokeltimon: " << endl;
 
-            cin >> troca;
-            troca--;
-        }
-    
-            while (troca == poke_campo_slot_mc || troca >= 5|| troca < 0 || mc.time[troca].hp_atual==0)
-            {
-                cout<<"Entrada inválida. Escolha outro Pokeltimon:"<<endl;
                 cin >> troca;
                 troca--;
-            } 
+
+                while (troca == poke_campo_slot_mc || troca >= 5|| troca < 0 || mc.time[troca].hp_atual==0)
+                {
+                    cout<<"Entrada inválida. Escolha outro Pokeltimon:"<<endl;
+                    cin >> troca;
+                    troca--;
+                } 
+            
             system("cls||clear");
 
             mc_campo.nome=mc.time[troca].nome;
@@ -270,6 +270,7 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
             mc_campo.tipo=mc.time[troca].tipo;
 
             poke_campo_slot_mc = troca;
+        }
         }
         else if ((mc_campo.hp_atual <= 0 && mc_desmaiados >= 5))
         {

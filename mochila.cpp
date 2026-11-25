@@ -1,7 +1,7 @@
 #include "sistemas.h"
 #include <iostream>
 
-void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex)
+void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex,int sprite[8])
 {
     bool mochila_aberta = true;
     int escolha;
@@ -84,7 +84,7 @@ void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex)
 
                 if(insignia[i]){
 
-                    cout << "  <**>" << endl;
+                    cout << "  <"<< sprite[i]<<sprite[i]<<">" << endl;
                 }
                 else {
 
