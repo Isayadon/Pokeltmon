@@ -30,9 +30,9 @@ bool carrega_tudo(Pokeltidex &dex)
         dex.pokemon[i].id = stoi(dados[0]); //o stoi converte string para int
         dex.pokemon[i].nome = dados[1];
         dex.pokemon[i].tipo = dados[2];
-        dex.pokemon[i].ataque = stoi(dados[4]);
-        dex.pokemon[i].defesa = stoi(dados[5]);
-        dex.pokemon[i].hp = stoi(dados[3]);
+        dex.pokemon[i].ataque = stoi(dados[3]);
+        dex.pokemon[i].defesa = stoi(dados[4]);
+        dex.pokemon[i].hp = stoi(dados[5]);
         dex.pokemon[i].poder_ataque = stoi(dados[6]);
         dex.pokemon[i].special = stoi(dados[7]);
 
