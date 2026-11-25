@@ -63,7 +63,7 @@ int main()
         cout << "├────────────────────────────┤" << endl;
         cout << "│  1. ✧ Aleatorizar time     │" << endl;
         cout << "│  2. ♡ Centro Pokeltmon     │" << endl;
-        cout << "│  3. Mochila                │" << endl;
+        cout << "│  3. ❀ Mochila              │" << endl;
         cout << "│  4. ⚔ Batalhar             │" << endl;
         cout << "│  5. Sair                   │" << endl;
         cout << "╰────────────────────────────╯" << endl;
@@ -75,21 +75,45 @@ int main()
         if (escolha == 1)
         {
             int troca;
-            for(int i=0;i<5;i++)
+
+            cout << "\n╭────────── ♡ SEU TIME ♡ ──────────╮" << endl;
+            
+            for(int i = 0; i < 5; i++)
             {
-                cout << "Pokeltimon " << i + 1 << ": " << mc.time[i].nome << endl;
+                cout << "│  [" << i + 1 << "] ✧ " << mc.time[i].nome << endl;
             }
-            cout << "✧ Qual deles voce quer trocar? ✧" << endl;
+
+            cout << "│  [0] ☾ Voltar        " << endl;
+
+            cout << "╰──────────────────────────────────╯" << endl;
+
+            cout << "✧ Qual pokemon deseja substituir? ♡ " << endl;
+
+            cout << "  " << endl;
+
+            cout << " Escolha (1-5) || 0 - Voltar " << endl;
+
             cin >> troca;
-            while (troca<1 || troca >5)
+
+            while (troca<0 || troca >5)
             {
                 cout << "escolha invalida" << endl;
                 cin >> troca;
             }
-            troca--;
-            if (mc.time[troca].hp_atual==0)
+
+            if(troca==0) {
+
+                cout << "voltando ao menu principal..." << endl;
+
+            }
+            else {
+
+                troca--;
+                if(mc.time[troca].hp_atual==0)
                 mc_desmaiados--;
-            aleatoriza_time(dex, mc, 1, npc,troca); // Chama a função para aleatorizar o time de Pokémons
+                aleatoriza_time(dex, mc, 1, npc,troca);
+            }
+
         }
         else if (escolha == 2) //Healing Pokeltmons
         {

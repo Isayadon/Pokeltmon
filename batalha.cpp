@@ -6,11 +6,16 @@ void batalha (Time &mc, bool insignia[8], Pokeltidex &dex, Time npc,int &mc_desm
 {
     int escolha; //usei int para armazenar a opção escolhida e conseguir validar entradas diferentes de 0 e 1
     int vitoria;
-    cout << "Contra quem você quer batalhar?" << endl;
-    cout << "0 - NPC | 1 - Líder de ginásio" << endl;
-    cin >> escolha;
+    cout << "\n╭────────────────────────────────╮" << endl;
+    cout << "│          ♡ BATALHA ♡           │" << endl;
+    cout << "├────────────────────────────────┤" << endl;
+    cout << "│  0. NPC                        │" << endl;
+    cout << "│  1. Líder de ginásio           │" << endl;
+    cout << "╰────────────────────────────────╯" << endl;
 
-    //Repete a pergunta enquanto o jogador não escolher 0 (NPC) ou 1 (Líder de ginásio)
+    cout << "  ✧ Escolha: ";
+
+    cin >> escolha;
 
     while(escolha != 0 && escolha != 1) { 
 
@@ -25,9 +30,8 @@ void batalha (Time &mc, bool insignia[8], Pokeltidex &dex, Time npc,int &mc_desm
             aleatoriza_time(dex, npc, 0,npc,i);
         vitoria=luta(mc,npc,mc_desmaiados);
         //if(vitoria==1)
-            // aqui é a implementação para xp caso faça depois
     }
-    else // escolha == 1: batalha contra líder de ginásio
+    else 
     {
         if (insignia[7]==1)
         {

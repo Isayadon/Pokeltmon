@@ -1,5 +1,4 @@
 #include "sistemas.h"
-
 #include <iostream>
 
 void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex)
@@ -14,7 +13,7 @@ void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex)
         cout << "├──────────────────────────────┤" << endl;
         cout << "│  1. ✧ Ver Pokeltmons         │" << endl;
         cout << "│  2. ♡ Ver insignias          │" << endl;
-        cout << "│  3. ID do treinador          │" << endl;
+        cout << "│  3. ❀ ID do treinador        │" << endl;
         cout << "│  4. Sair                     │" << endl;
         cout << "╰──────────────────────────────╯" << endl;
 
@@ -77,10 +76,26 @@ void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex)
         else if (escolha == 2 )
         {
             system("cls||clear");
+
             for (int i = 0; i < 8; i++)
             {
+
+                cout << "\n   /\\ " << endl;
+
+                if(insignia[i]){
+
+                    cout << "  <**>" << endl;
+                }
+                else {
+
+                    cout << "  <..>" << endl;
+                }
+
+                cout << "   \\/" << endl;
+
                 if (insignia[i]) 
-                    cout << "Insignia " << i + 1 << ": Conquistada" << endl;
+
+                    cout << "Insignia " << i + 1 << ": Conquistada ✧" << endl;
                     
                 else 
                     cout << "Insignia " << i + 1 << ": Não conquistada" << endl;
@@ -94,7 +109,8 @@ void mochila (Time &mc , bool insignia[8],string nome_mc,Pokeltidex &dex)
                 if (dex.pokemon[i].capturado == true)
                     encontrados++;
             }
-            cout << "Nome: " << nome_mc << endl;
+            cout << "♡ Nome: " << nome_mc << endl;
+            cout << "  " << endl;
             cout << "❖ Pokeltimons encontrados: " << encontrados << endl;
         }
         else if (escolha == 4)

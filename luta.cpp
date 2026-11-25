@@ -52,16 +52,36 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
 
     while (vitoria == 0)
     {
-        cout << "Seu pokeltimon " << mc_campo.nome << "  " << mc_campo.hp_atual << "/" << mc_campo.hp_maximo << endl; 
-        cout << endl << endl;
+
+        cout << "\n╭──────────── ♡ CAMPO DE BATALHA ♡ ────────────╮" << endl;
+
+        cout << "│" << endl;
+        cout << "│♡ SEU POKELTIMON" << endl;
+        cout << "│  " << mc_campo.nome << endl;
+        cout << "│  HP: " << mc_campo.hp_atual << "/" << mc_campo.hp_maximo << endl;
+
+        cout << "|" << endl;
+        cout << "│                 ◉ ─── VS ─── ◉             " << endl;
+        cout << "|" << endl;
+
+        cout << "│                                  ADVERSÁRIO ✧" << endl;
+        cout << "│                                  " << npc_campo.nome << endl;
+        cout << "│                                  HP:" << npc_campo.hp_atual << "/" << npc_campo.hp_maximo << endl;
+
+        cout << "╰──────────────────────────────────────────────╯" << endl;
+
+        cout << "  " << endl;
 
 
-        cout << "Pokeltimon do npc " << npc_campo.nome << "  " << npc_campo.hp_atual << "/" << npc_campo.hp_maximo << endl;
-        cout << endl ;
+        cout << "\n╭────────────── ♡ AÇÕES ♡ ──────────────╮" << endl;
+        cout << "│  [1] ✦ Atacar                         │" << endl;
+        cout << "│  [2] ✧ Trocar Pokémon                 │" << endl;
+        cout << "│  [3] ☾ Fugir                          │" << endl;
+        cout << "╰───────────────────────────────────────╯" << endl;
+
+        cout << " Escolha sua ação: ";
 
 
-        cout << "O que você vai fazer?" << endl<<endl;
-        cout << "1 - Atacar | 2 - Trocar Pokémon | 3 - Fugir" << endl;
         cin >> escolha_batalha;
         while (escolha_batalha<1||escolha_batalha>3)
             {
@@ -79,7 +99,8 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
             }
             else 
             {
-                cout << "Você usou o ataque especial!" << endl;
+                cout << "✯ Você usou um ataque especial! ✯" << endl;
+
                 npc_campo.hp_atual -= ((mc_campo.ataque*mc_campo.special/npc_campo.defesa)*afinidade(mc_campo.tipo,npc_campo.tipo));
                 especial_cont_mc=0;
             }
@@ -87,12 +108,21 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
         }
         else if (escolha_batalha == 2)
         {
-            for (int h=0; h<5;h++)
+
+            cout << "\n╭────────────── ♡ SEU TIME ♡ ──────────────╮" << endl;
+
+            for (int h = 0; h < 5; h++)
             {
-                cout << mc.time[h].nome << "   "  << mc.time[h].hp_atual << "/" << mc.time[h].hp_maximo << endl;
+                cout << "  [" << h + 1 << "] ✧ " << mc.time[h].nome;
+                cout << " | HP: " << mc.time[h].hp_atual << "/" << mc.time[h].hp_maximo << endl;
             }
-            cout << "Trocar o Pokémon em campo por qual? (1-5):"<<endl;
+
+            cout << "╰─────────────────────────────────────────╯" << endl;
+
+            cout << "\n♡ Qual Pokémon deseja colocar em campo? (1-5): " << endl;
+
             cin >> troca;
+
             troca--;
             while (troca == poke_campo_slot_mc || troca >= 5 || troca < 0 || mc.time[troca].hp_atual==0)
             {
@@ -120,15 +150,15 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
             chance_fuga=rand()%30 +1;
             if ((chance_fuga%2)==0 && (chance_fuga%3)==0)
             {
-                cout << "Você fugiu da batalha!" << endl;
+                cout << "୭ Você fugiu da batalha ୭" << endl;
                 vitoria = 2;
                 mc.time[poke_campo_slot_mc].hp_atual=mc_campo.hp_atual;
             }
             else 
-                cout << "Você não conseguiu fugir!" << endl;
+                cout << "୭ Você não conseguiu fugir! ୭" << endl;
             
         }
-        
+        cout << "  " << endl;
         
         if (vitoria==0&&npc_campo.hp_atual>0)
         {// para que o npc nao ataque caso voce corra
@@ -161,23 +191,67 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
         else if (npc_campo.hp_atual <= 0 && poke_campo_slot_npc >= 4)
         {
             mc.time[poke_campo_slot_mc].hp_atual=mc_campo.hp_atual;
-            cout << "Você ganhou!"<<endl;
-            cout << "digite qualquer coisa para voltar"<<endl;
+
+
+            cout << "\n╭──────────────────────────────╮" << endl;
+            cout << "│          ♡ VITÓRIA ♡         │" << endl;
+            cout << "├──────────────────────────────┤" << endl;
+            cout << "│       ✧ VOCÊ GANHOU! ✧       │" << endl;
+            cout << "╰──────────────────────────────╯" << endl;
+
+            cout << "\n♡ Digite qualquer coisa para voltar: ";
             cin >> espera;
             vitoria = 1;
         }
-        if (mc_campo.hp_atual <= 0 && mc_desmaiados<5)
+        if (vitoria == 0 && mc_campo.hp_atual <= 0)
         {
-            mc_campo.hp_atual=0; // para nao ter vida negativa
+            mc_desmaiados++;
+
+            mc_campo.hp_atual = 0;
+
             mc.time[poke_campo_slot_mc].hp_atual = 0;
-            cout << "Seu Pokeltimon desmaiou!"<<endl<<endl;
-            for (int h=0; h<5;h++)
-            {
-                cout << mc.time[h].nome << "   "  << mc.time[h].hp_atual << "/" << mc.time[h].hp_maximo << endl;
+
+            if (mc_desmaiados >= 5) {
+
+                cout << "\n╭──────────────────────────────────╮" << endl;
+                cout << "│            ♡ DERROTA ♡           │" << endl;
+                cout << "├──────────────────────────────────┤" << endl;
+                cout << "│  Todos os seus Pokeltimons       │" << endl;
+                cout << "│  desmaiaram!                     │" << endl;
+                cout << "╰──────────────────────────────────╯" << endl;
+                
+                cout << "\n♡ Digite qualquer coisa para voltar: ";
+
+                cin >> espera;
+                
+                vitoria = 2;
             }
-            cout <<endl << "Escolha o próximo Pokeltimon:" << endl;
+            else {
+                cout << "୭ Seu Pokeltimon desmaiou! ୭" << endl << endl;
+
+                cout << "\n♡ SEU TIME ♡" << endl;
+
+                cout << "===============================" << endl;
+
+            
+
+            for (int h = 0; h < 5; h++)
+            {
+                cout << "[" << h + 1 << "] ✧ " << mc.time[h].nome;
+
+                cout << "  | HP: " << mc.time[h].hp_atual << "/" << mc.time[h].hp_maximo << endl;
+            }
+
+            cout << "===============================" << endl;
+
+            cout << "  " << endl;
+
+            cout << "✧ Escolha seu proximo Pokeltimon: " << endl;
+
             cin >> troca;
             troca--;
+        }
+    
             while (troca == poke_campo_slot_mc || troca >= 5|| troca < 0 || mc.time[troca].hp_atual==0)
             {
                 cout<<"Entrada inválida. Escolha outro Pokeltimon:"<<endl;
@@ -194,12 +268,14 @@ int luta(Time &mc, Time &npc,int &mc_desmaiados)
             mc_campo.special=mc.time[troca].special;
             mc_campo.defesa=mc.time[troca].defesa;
             mc_campo.tipo=mc.time[troca].tipo;
+
             poke_campo_slot_mc = troca;
-            mc_desmaiados++;
         }
         else if ((mc_campo.hp_atual <= 0 && mc_desmaiados >= 5))
         {
-            mc.time[poke_campo_slot_mc].hp_atual=mc_campo.hp_atual;
+            mc_campo.hp_atual=0;
+            mc.time[poke_campo_slot_mc].hp_atual = 0;
+
             cout<<"Você perdeu!" << endl;
             cout << "digite qualquer coisa para voltar"<<endl;
             cin >> espera;
